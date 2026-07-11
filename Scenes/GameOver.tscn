@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://cyia0niv2m084"]
+
+[ext_resource type="Script" uid="uid://co36w0f4x847c" path="res://Scripts/GameOver.gd" id="1_k52d1"]
+[ext_resource type="FontFile" uid="uid://2p35jk1ggllc" path="res://Assets/BoldPixels.ttf" id="1_m5628"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mqryn"]
+bg_color = Color(1, 0.14117648, 0.2901961, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.5019608, 0, 0.23921569, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 10
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wy31b"]
+bg_color = Color(0.3260239, 0.6308866, 0, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+shadow_size = 8
+shadow_offset = Vector2(4, 4)
+
+[node name="GameOver" type="CanvasLayer" unique_id=1443684564]
+script = ExtResource("1_k52d1")
+
+[node name="GameOverPanel" type="Panel" parent="." unique_id=142848206]
+custom_minimum_size = Vector2(500, 400)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mqryn")
+
+[node name="GameOverLabel" type="Label" parent="." unique_id=527972930]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -195.0
+offset_top = -83.0
+offset_right = 195.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0.5019608, 0, 0.23921569, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_fonts/font = ExtResource("1_m5628")
+theme_override_font_sizes/font_size = 80
+text = "GAME OVER"
+
+[node name="RestartButton" type="Button" parent="." unique_id=1258261143]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.0
+offset_top = 16.0
+offset_right = 184.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("1_m5628")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_wy31b")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wy31b")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wy31b")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_wy31b")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_wy31b")
+theme_override_styles/focus = SubResource("StyleBoxFlat_wy31b")
+text = "PLAY AGAIN"
+
+[connection signal="pressed" from="RestartButton" to="." method="_on_RestartButton_pressed"]

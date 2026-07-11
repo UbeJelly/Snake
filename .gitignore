@@ -1,0 +1,9 @@
+.env/
+.godot/
+.import/
+export.cfg
+export_presets.cfg
+export_credentials.cfg
+*editorconfig
+*.tmp
+*.import

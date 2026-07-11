@@ -1,0 +1,157 @@
+extends Node
+
+
+@export_category("Sprite2D")
+@export var snake_scene: PackedScene = preload("res://Scenes/SnakeSegment.tscn")
+
+@export_category("Game")
+@export var score: int
+@export var game_started := false
+
+@export_category("Grid")
+@export var cells: int = 20
+@export var cell_size: int = 50
+
+# food variables
+var food_position: Vector2i
+var drop_food := true
+
+# snake variables
+var old_data: Array[Vector2i]
+var snake_data: Array[Vector2i]
+var snake: Array[Panel]
+var head: Vector2i
+
+# move variables
+var spawn_point := Vector2i(9, 9)
+var up := Vector2i.UP
+var down := Vector2i.DOWN
+var left := Vector2i.LEFT
+var right := Vector2i.RIGHT
+var move_direction := Vector2i.ZERO
+var can_move: bool
+
+
+func _ready() -> void:
+	new_game()
+
+
+func new_game() -> void:
+	get_tree().paused = false
+	get_tree().call_group("segments", "queue_free")
+	$GameOver.hide()
+	score = 0
+	$HUD/ScoreLabel.text = "SCORE: %s" % score
+	move_direction = up
+	can_move = true
+	spawn_snake()
+	move_food()
+
+
+func spawn_snake() -> void:
+	old_data.clear()
+	snake_data.clear()
+	snake.clear()
+
+	# start at spawn_point, make tail segments
+	for i in range(3):
+		add_segment(spawn_point + Vector2i(0, i))
+
+	head = snake_data[0]
+
+
+func add_segment(pos: Vector2i) -> void:
+	snake_data.append(pos)
+	var snake_segment: Panel = snake_scene.instantiate()
+	snake_segment.position = (pos * cell_size) + Vector2i(0, cell_size)
+	add_child(snake_segment)
+	snake.append(snake_segment)
+
+
+func _process(_delta: float) -> void:
+	move_snake()
+
+
+func move_snake() -> void:
+	if can_move:
+		if Input.is_action_just_pressed("move_down") and move_direction != up:
+			move_direction = down
+			set_move()
+		if Input.is_action_just_pressed("move_up") and move_direction != down:
+			move_direction = up
+			set_move()
+		if Input.is_action_just_pressed("move_left") and move_direction != right:
+			move_direction = left
+			set_move()
+		if Input.is_action_just_pressed("move_right") and move_direction != left:
+			move_direction = right
+			set_move()
+
+
+func set_move() -> void:
+	can_move = false
+	if not game_started:
+		start_game()
+
+
+func start_game() -> void:
+	game_started = true
+	$MoveTimer.start()
+
+
+func _on_MoveTimer_timeout() -> void:
+	can_move = true
+	old_data = Array([], TYPE_VECTOR2I, "", null)  + snake_data # move segment to old pos
+	snake_data[0] += move_direction
+
+	for i in range(len(snake_data)):
+		if i > 0: # move segments along by 1
+			snake_data[i] = old_data[i - 1]
+		snake[i].position = (snake_data[i] * cell_size) + Vector2i(0, cell_size)
+
+	head = snake_data[0]
+
+	check_out_bounds()
+	check_self_eaten()
+	check_food_eaten()
+
+
+func check_out_bounds() -> void:
+	if head.x < 0 or head.x > cells - 1 or head.y < 0 or head.y > cells - 1:
+		end_game()
+
+
+func check_self_eaten() -> void:
+	for i in range(1, len(snake_data)):
+		if head == snake_data[i]:
+			end_game()
+
+
+func check_food_eaten() -> void:
+	if head == food_position:
+		score += 1
+		$HUD/ScoreLabel.text = "SCORE: %s" % score
+		add_segment(old_data[-1])
+		move_food()
+
+
+func move_food() -> void:
+	while drop_food:
+		drop_food = false
+		food_position = Vector2i(randi_range(0, cells - 1), randi_range(0, cells - 1))
+		for i in snake_data:
+			if food_position == i:
+				drop_food = true
+	$Food.position = (food_position * cell_size) + Vector2i(0, cell_size)
+	drop_food = true
+
+
+func end_game() -> void:
+	$GameOver.show()
+	$MoveTimer.stop()
+	game_started = false
+	get_tree().paused = true
+
+
+func _on_game_over_restart() -> void:
+	new_game()

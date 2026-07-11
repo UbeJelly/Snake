@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cybg413dhj0v0"]
+
+[ext_resource type="Script" uid="uid://culaa85yrytur" path="res://Scripts/Main.gd" id="1_idj7w"]
+[ext_resource type="Texture2D" uid="uid://dnfbsmdobrmst" path="res://Assets/bg.png" id="2_kln2b"]
+[ext_resource type="PackedScene" uid="uid://ok7xv2xv4a8a" path="res://Scenes/HUD.tscn" id="3_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://b4v6cf8p7nev4" path="res://Scenes/Food.tscn" id="4_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://cyia0niv2m084" path="res://Scenes/GameOver.tscn" id="5_pbw6q"]
+
+[node name="Main" type="Node" unique_id=2132924122]
+script = ExtResource("1_idj7w")
+
+[node name="BG" type="Sprite2D" parent="." unique_id=6046823]
+position = Vector2(0, 50)
+texture = ExtResource("2_kln2b")
+centered = false
+
+[node name="HUD" parent="." unique_id=300059963 instance=ExtResource("3_rgh2o")]
+
+[node name="MoveTimer" type="Timer" parent="." unique_id=1745761599]
+wait_time = 0.1
+
+[node name="Food" parent="." unique_id=769451045 instance=ExtResource("4_rgh2o")]
+
+[node name="GameOver" parent="." unique_id=1443684564 instance=ExtResource("5_pbw6q")]
+process_mode = 2
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]
+[connection signal="restart" from="GameOver" to="." method="_on_game_over_restart"]
