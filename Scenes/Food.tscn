@@ -2,16 +2,16 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mqryn"]
 bg_color = Color(0.99999994, 0.14177391, 0.29173294, 1)
-skew = Vector2(0.25, 0)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
+border_width_left = 4
+border_width_top = 2
+border_width_right = 4
+border_width_bottom = 20
 border_color = Color(0.50110394, 0, 0.23757759, 1)
 corner_radius_top_right = 50
 corner_radius_bottom_right = 60
 corner_radius_bottom_left = 50
 shadow_size = 4
+shadow_offset = Vector2(0, 4)
 
 [node name="Food" type="Panel" unique_id=769451045]
 custom_minimum_size = Vector2(50, 50)

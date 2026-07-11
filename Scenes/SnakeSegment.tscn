@@ -2,19 +2,21 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mqryn"]
 bg_color = Color(0.23406506, 0.6893213, 0.9999998, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
+border_width_left = 4
+border_width_top = 2
+border_width_right = 4
+border_width_bottom = 20
 border_color = Color(0.09935089, 0.39107466, 1, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 shadow_size = 4
+shadow_offset = Vector2(0, 4)
 
 [node name="SnakeSegment" type="Panel" unique_id=769451045 groups=["segments"]]
 custom_minimum_size = Vector2(50, 50)
 offset_right = 40.0
 offset_bottom = 40.0
+pivot_offset = Vector2(25, 25)
 theme_override_styles/panel = SubResource("StyleBoxFlat_mqryn")

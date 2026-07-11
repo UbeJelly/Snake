@@ -84,6 +84,8 @@ offset_right = 184.0
 offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(184, 38)
+offset_transform_enabled = true
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
@@ -101,4 +103,6 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_wy31b")
 theme_override_styles/focus = SubResource("StyleBoxFlat_wy31b")
 text = "PLAY AGAIN"
 
+[connection signal="mouse_entered" from="RestartButton" to="." method="_on_RestartButton_mouse_entered" flags=18]
+[connection signal="mouse_exited" from="RestartButton" to="." method="_on_RestartButton_mouse_exited" flags=18]
 [connection signal="pressed" from="RestartButton" to="." method="_on_RestartButton_pressed"]
