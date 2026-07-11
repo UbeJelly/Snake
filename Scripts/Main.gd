@@ -154,6 +154,11 @@ func end_game() -> void:
 	$GameOver.show()
 	$MoveTimer.stop()
 	game_started = false
+	$HUD/ScoreLabel.offset_transform_scale = Vector2.ONE
+	$HUD/ScoreLabel.offset_transform_rotation = 0.0
+	$GameOver/RestartButton.offset_transform_scale = Vector2.ONE
+	$GameOver/RestartButton.offset_transform_rotation = 0.0
+	$GameOver/RestartButton.self_modulate = Color(1, 1, 1, 1)
 	get_tree().paused = true
 
 
