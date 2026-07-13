@@ -2,6 +2,14 @@
 
 [ext_resource type="Script" uid="uid://co36w0f4x847c" path="res://Scripts/GameOver.gd" id="1_k52d1"]
 [ext_resource type="FontFile" uid="uid://2p35jk1ggllc" path="res://Assets/BoldPixels.ttf" id="1_m5628"]
+[ext_resource type="Shader" uid="uid://isg7xebx6d87" path="res://Resources/Transition.gdshader" id="3_ktc4i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uib17"]
+shader = ExtResource("3_ktc4i")
+shader_parameter/circle_position = Vector2(0.5, 0.5)
+shader_parameter/progress = 0.0
+shader_parameter/smoothness = 0.03
+shader_parameter/background = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mqryn"]
 bg_color = Color(1, 0.14117648, 0.2901961, 1)
@@ -37,6 +45,14 @@ shadow_offset = Vector2(4, 4)
 
 [node name="GameOver" type="CanvasLayer" unique_id=1443684564]
 script = ExtResource("1_k52d1")
+
+[node name="GameOverTransition" type="ColorRect" parent="." unique_id=1520710564]
+material = SubResource("ShaderMaterial_uib17")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="GameOverPanel" type="Panel" parent="." unique_id=142848206]
 custom_minimum_size = Vector2(500, 400)

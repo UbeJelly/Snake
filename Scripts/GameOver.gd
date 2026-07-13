@@ -2,6 +2,12 @@ extends CanvasLayer
 
 
 signal restart
+signal close_transition
+var tween
+
+
+func _ready() -> void:
+	connect("close_transition", _on_close_transition)
 
 
 func _on_RestartButton_pressed() -> void:
@@ -9,14 +15,29 @@ func _on_RestartButton_pressed() -> void:
 
 
 func _on_RestartButton_mouse_entered(button: Button) -> void:
-	var tween: Tween = get_tree().create_tween().set_parallel(true).bind_node(self)
+	if tween: tween.kill()
+	tween = get_tree().create_tween().set_parallel(true).bind_node(self)
 	tween.tween_property(button, "offset_transform_scale", Vector2(1.2, 1.2), 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(button, "offset_transform_rotation", -0.05, 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(button, "self_modulate", Color(1.25, 1.25, 1.25, 1.0), 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 
 
 func _on_RestartButton_mouse_exited(button: Button) -> void:
-	var tween: Tween = get_tree().create_tween().set_parallel(true).bind_node(self)
+	if tween: tween.kill()
+	tween = get_tree().create_tween().set_parallel(true).bind_node(self)
 	tween.tween_property(button, "offset_transform_scale", Vector2.ONE, 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(button, "offset_transform_rotation", 0.0, 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(button, "self_modulate", Color(1, 1, 1, 1), 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+
+
+func _on_close_transition(snake_head: Vector2) -> void:
+	$GameOverTransition.get_material().set_shader_parameter("progress", 0.0)
+	$GameOverTransition.get_material().set_shader_parameter("circle_position",
+	(snake_head + Vector2(25, 25)) / Vector2(owner.get_window().size))
+	if tween: tween.kill()
+	tween = get_tree().create_tween().set_parallel(true).bind_node(self)
+	tween.tween_method(set_shader_value, 0.75, 1.0, 0.75).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
+
+
+func set_shader_value(value: float) -> void:
+	$GameOverTransition.get_material().set_shader_parameter("progress", value)

@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bn3yu8gwhh4cg"]
 
+[ext_resource type="Script" uid="uid://cqd0td0wmhd8o" path="res://Scripts/SnakeSegment.gd" id="1_cjwfd"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mqryn"]
 bg_color = Color(0.23406506, 0.6893213, 0.9999998, 1)
 border_width_left = 4
@@ -14,9 +16,28 @@ corner_radius_bottom_left = 10
 shadow_size = 4
 shadow_offset = Vector2(0, 4)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cjwfd"]
+bg_color = Color(0, 0, 0, 0.49019608)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
 [node name="SnakeSegment" type="Panel" unique_id=769451045 groups=["segments"]]
 custom_minimum_size = Vector2(50, 50)
 offset_right = 40.0
 offset_bottom = 40.0
 pivot_offset = Vector2(25, 25)
+offset_transform_enabled = true
 theme_override_styles/panel = SubResource("StyleBoxFlat_mqryn")
+script = ExtResource("1_cjwfd")
+
+[node name="Shadow" type="Panel" parent="." unique_id=2050379038]
+show_behind_parent = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(25, 25)
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_cjwfd")

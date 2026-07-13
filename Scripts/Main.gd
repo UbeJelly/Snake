@@ -9,17 +9,17 @@ extends Node
 @export var game_started := false
 
 @export_category("Grid")
-@export var cells: int = 20
+@export var cells: int = 15
 @export var cell_size: int = 50
 
 # food variables
 var food_position: Vector2i
 var drop_food := true
 
-# snake variables
+# snake_refs variables
 var old_data: Array[Vector2i]
 var snake_data: Array[Vector2i]
-var snake: Array[Panel]
+var snake_refs: Array[Panel]
 var head: Vector2i
 
 # move variables
@@ -30,6 +30,13 @@ var left := Vector2i.LEFT
 var right := Vector2i.RIGHT
 var move_direction := Vector2i.ZERO
 var can_move: bool
+
+@onready var food: Panel = $World/Food
+@onready var snake: Control = $World/Snake
+
+@onready var sfx: AudioStreamPlayer = $SFX
+@onready var eat: AudioStreamWAV = preload("res://Assets/eat.wav")
+@onready var hit: AudioStreamWAV = preload("res://Assets/hit.wav")
 
 
 func _ready() -> void:
@@ -44,6 +51,8 @@ func new_game() -> void:
 	$HUD/ScoreLabel.text = "SCORE: %s" % score
 	move_direction = up
 	can_move = true
+
+	$Transition.emit_signal("open_transition")
 	spawn_snake()
 	move_food()
 
@@ -51,7 +60,7 @@ func new_game() -> void:
 func spawn_snake() -> void:
 	old_data.clear()
 	snake_data.clear()
-	snake.clear()
+	snake_refs.clear()
 
 	# start at spawn_point, make tail segments
 	for i in range(3):
@@ -64,8 +73,9 @@ func add_segment(pos: Vector2i) -> void:
 	snake_data.append(pos)
 	var snake_segment: Panel = snake_scene.instantiate()
 	snake_segment.position = (pos * cell_size) + Vector2i(0, cell_size)	
-	add_child(snake_segment)
-	animate_added_segment(snake_segment)
+	snake.add_child(snake_segment, true)
+	snake_refs.append(snake_segment)
+	snake_segment.emit_signal("spawn_segment")
 
 
 func _process(_delta: float) -> void:
@@ -108,7 +118,7 @@ func _on_MoveTimer_timeout() -> void:
 		if i > 0: # move segments along by 1
 			snake_data[i] = old_data[i - 1]
 		var tween: Tween = get_tree().create_tween()
-		tween.tween_property(snake[i], "position",
+		tween.tween_property(snake_refs[i], "position",
 		Vector2((snake_data[i] * cell_size) + Vector2i(0, cell_size)), 0.1)
 
 	head = snake_data[0]
@@ -120,12 +130,16 @@ func _on_MoveTimer_timeout() -> void:
 
 func check_out_bounds() -> void:
 	if head.x < 0 or head.x > cells - 1 or head.y < 0 or head.y > cells - 1:
+		sfx.stream = hit
+		sfx.play()
 		end_game()
 
 
 func check_self_eaten() -> void:
 	for i in range(1, len(snake_data)):
 		if head == snake_data[i]:
+			sfx.stream = hit
+			sfx.play()
 			end_game()
 
 
@@ -134,6 +148,8 @@ func check_food_eaten() -> void:
 		score += 1
 		$HUD/ScoreLabel.text = "SCORE: %s" % score
 		$HUD.score_update.emit()
+		sfx.stream = eat
+		sfx.play()
 		add_segment(old_data[-1])
 		move_food()
 
@@ -145,15 +161,16 @@ func move_food() -> void:
 		for i in snake_data:
 			if food_position == i:
 				drop_food = true
-	$Food.position = (food_position * cell_size) + Vector2i(0, cell_size)
+	food.position = (food_position * cell_size) + Vector2i(0, cell_size)
 	drop_food = true
-	animate_food_drop()
+	food.emit_signal("spawn_food")
 
 
 func end_game() -> void:
 	$GameOver.show()
 	$MoveTimer.stop()
 	game_started = false
+	$GameOver.emit_signal("close_transition", snake_refs[0].global_position)
 	$HUD/ScoreLabel.offset_transform_scale = Vector2.ONE
 	$HUD/ScoreLabel.offset_transform_rotation = 0.0
 	$GameOver/RestartButton.offset_transform_scale = Vector2.ONE
@@ -166,24 +183,7 @@ func _on_game_over_restart() -> void:
 	new_game()
 
 
-func animate_added_segment(snake_segment: Panel) -> void:
-	snake_segment.scale = Vector2.ZERO
-	snake_segment.self_modulate = Color(4, 4, 4, 1)
-	var tween_scale: Tween = get_tree().create_tween()
-	var tween_color: Tween = get_tree().create_tween()
-	tween_scale.tween_property(snake_segment, "scale", Vector2.ONE,
-	1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
-	tween_color.tween_property(snake_segment, "self_modulate", Color(1, 1, 1, 1),
-	1.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
-	snake.append(snake_segment)
-
-
-func animate_food_drop() -> void:
-	$Food.scale = Vector2.ZERO
-	$Food.self_modulate = Color(4, 4, 4, 1)
-	var tween_scale: Tween = get_tree().create_tween()
-	var tween_color: Tween = get_tree().create_tween()
-	tween_scale.tween_property($Food, "scale", Vector2.ONE,
-	1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
-	tween_color.tween_property($Food, "self_modulate", Color(1, 1, 1, 1),
-	1.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+func _input(event: InputEvent) -> void:
+	if Engine.is_editor_hint() or OS.is_debug_build():
+		if event is InputEventKey and event.physical_keycode == KEY_R and event.pressed:
+			new_game()
