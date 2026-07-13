@@ -2,6 +2,7 @@ extends Panel
 
 
 signal spawn_food
+signal spawn_dust(position: Vector2)
 var tween
 
 
@@ -18,3 +19,5 @@ func _on_spawn_food() -> void:
 	1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property($Shadow, "offset_transform_position:y", 0.0,
 	1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	await get_tree().create_timer(0.25).timeout
+	spawn_dust.emit(global_position)

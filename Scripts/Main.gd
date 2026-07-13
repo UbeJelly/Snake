@@ -164,6 +164,7 @@ func move_food() -> void:
 	food.position = (food_position * cell_size) + Vector2i(0, cell_size)
 	drop_food = true
 	food.emit_signal("spawn_food")
+	await food.spawn_food
 
 
 func end_game() -> void:
@@ -187,3 +188,9 @@ func _input(event: InputEvent) -> void:
 	if Engine.is_editor_hint() or OS.is_debug_build():
 		if event is InputEventKey and event.physical_keycode == KEY_R and event.pressed:
 			new_game()
+
+
+func _on_food_spawn_dust(position: Vector2) -> void:
+	$World/Dust.restart()
+	$World/Dust.global_position = position + Vector2(25, 25)
+	$World/Dust.emitting = true

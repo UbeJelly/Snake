@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://culaa85yrytur" path="res://Scripts/Main.gd" id="1_idj7w"]
 [ext_resource type="Texture2D" uid="uid://dnfbsmdobrmst" path="res://Assets/bg.png" id="2_kln2b"]
 [ext_resource type="PackedScene" uid="uid://ok7xv2xv4a8a" path="res://Scenes/HUD.tscn" id="3_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://6kphh20v6olo" path="res://Scenes/Dust.tscn" id="4_jw32o"]
 [ext_resource type="PackedScene" uid="uid://b4v6cf8p7nev4" path="res://Scenes/Food.tscn" id="4_rgh2o"]
 [ext_resource type="PackedScene" uid="uid://cyia0niv2m084" path="res://Scenes/GameOver.tscn" id="5_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://cwrxav0e7w5k0" path="res://Scenes/Transition.tscn" id="6_v1gob"]
@@ -31,7 +32,11 @@ texture = ExtResource("2_kln2b")
 expand_mode = 1
 stretch_mode = 2
 
+[node name="Dust" parent="World" unique_id=2101318271 instance=ExtResource("4_jw32o")]
+position = Vector2(75, 125)
+
 [node name="Food" parent="World" unique_id=769451045 instance=ExtResource("4_rgh2o")]
+z_index = 1
 layout_mode = 0
 offset_left = 50.0
 offset_top = 100.0
@@ -39,6 +44,7 @@ offset_right = 100.0
 offset_bottom = 150.0
 
 [node name="Snake" type="Control" parent="World" unique_id=967251976]
+z_index = 1
 y_sort_enabled = true
 layout_mode = 1
 anchors_preset = 15
@@ -62,5 +68,6 @@ process_mode = 3
 [node name="MoveTimer" type="Timer" parent="." unique_id=1745761599]
 wait_time = 0.1
 
+[connection signal="spawn_dust" from="World/Food" to="." method="_on_food_spawn_dust"]
 [connection signal="restart" from="GameOver" to="." method="_on_game_over_restart"]
 [connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]
