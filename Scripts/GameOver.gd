@@ -3,6 +3,7 @@ extends CanvasLayer
 
 signal restart
 signal close_transition
+signal mouse_entered
 var tween_button
 var tween_transition
 
@@ -16,6 +17,7 @@ func _on_RestartButton_pressed() -> void:
 
 
 func _on_RestartButton_mouse_entered(button: Button) -> void:
+	mouse_entered.emit()
 	if tween_button: tween_button.kill()
 	tween_button = get_tree().create_tween().set_parallel(true).bind_node(self)
 	tween_button.tween_property(button, "offset_transform_scale", Vector2(1.2, 1.2), 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)

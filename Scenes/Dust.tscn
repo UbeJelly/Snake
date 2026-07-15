@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://6kphh20v6olo"]
 
 [ext_resource type="Texture2D" uid="uid://bexdlt0ke0m16" path="res://Assets/circle.svg" id="1_od6q6"]
+[ext_resource type="Script" uid="uid://c4c25t2nhv2m5" path="res://Scripts/Dust.gd" id="2_juf1o"]
 
 [sub_resource type="Curve" id="Curve_v1gob"]
 _limits = [-200.0, 200.0, 0.0, 1.0]
@@ -10,12 +11,12 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_bmxlf"]
 curve = SubResource("Curve_v1gob")
 
-[sub_resource type="Curve" id="Curve_jw32o"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25523013, 0.39325845), -0.21773452, -0.21773452, 0, 0, Vector2(1, 0), 0.399952, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_od6q6"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.19254659, 0.5393259), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_50glp"]
-curve = SubResource("Curve_jw32o")
+[sub_resource type="CurveTexture" id="CurveTexture_od6q6"]
+curve = SubResource("Curve_od6q6")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mqryn"]
 particle_flag_disable_z = true
@@ -34,12 +35,15 @@ radial_accel_max = 49.999996
 radial_accel_curve = SubResource("CurveTexture_bmxlf")
 attractor_interaction_enabled = false
 scale_max = 5.0
-scale_curve = SubResource("CurveTexture_50glp")
+scale_curve = SubResource("CurveTexture_od6q6")
 
-[node name="Dust" type="GPUParticles2D" unique_id=2101318271]
+[node name="Dust" type="GPUParticles2D" unique_id=2101318271 groups=["dusts"]]
 emitting = false
 texture = ExtResource("1_od6q6")
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_mqryn")
+script = ExtResource("2_juf1o")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

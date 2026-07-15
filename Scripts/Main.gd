@@ -3,6 +3,8 @@ extends Node
 
 @export_category("Sprite2D")
 @export var snake_scene: PackedScene = preload("res://Scenes/SnakeSegment.tscn")
+@export var dust_scene: PackedScene = preload("res://Scenes/Dust.tscn")
+@export var shadow: PackedScene = preload("res://Scenes/Shadow.tscn")
 
 @export_category("Game")
 @export var score: int
@@ -32,11 +34,13 @@ var move_direction := Vector2i.ZERO
 var can_move: bool
 
 @onready var food: Panel = $World/Food
-@onready var snake: Control = $World/Snake
+@onready var snake: Control = $World/SubViewport/Snake
 
 @onready var sfx: AudioStreamPlayer = $SFX
 @onready var eat: AudioStreamWAV = preload("res://Assets/eat.wav")
 @onready var hit: AudioStreamWAV = preload("res://Assets/hit.wav")
+@onready var drop: AudioStreamWAV = preload("res://Assets/drop.wav")
+@onready var focus: AudioStreamWAV = preload("res://Assets/focus.wav")
 
 
 func _ready() -> void:
@@ -46,6 +50,7 @@ func _ready() -> void:
 func new_game() -> void:
 	get_tree().paused = false
 	get_tree().call_group("segments", "queue_free")
+	get_tree().call_group("dusts", "queue_free")
 	$GameOver.hide()
 	score = 0
 	$HUD/ScoreLabel.text = "SCORE: %s" % score
@@ -72,10 +77,14 @@ func spawn_snake() -> void:
 func add_segment(pos: Vector2i) -> void:
 	snake_data.append(pos)
 	var snake_segment: Panel = snake_scene.instantiate()
-	snake_segment.position = (pos * cell_size) + Vector2i(0, cell_size)	
+	var snake_shadow: Panel = shadow.instantiate()
+	snake_segment.position = (pos * cell_size) + Vector2i(0, cell_size)
+	snake_shadow.position = (pos * cell_size) + Vector2i(0, cell_size)
 	snake.add_child(snake_segment, true)
+	$World.add_child(snake_shadow, true)
 	snake_refs.append(snake_segment)
 	snake_segment.emit_signal("spawn_segment")
+	snake_shadow.emit_signal("follow_segment", snake_segment)
 
 
 func _process(_delta: float) -> void:
@@ -171,7 +180,7 @@ func end_game() -> void:
 	$GameOver.show()
 	$MoveTimer.stop()
 	game_started = false
-	$GameOver.emit_signal("close_transition", snake_refs[0].global_position)
+	$GameOver.emit_signal("close_transition", snake_refs[0].position)
 	$HUD/ScoreLabel.offset_transform_scale = Vector2.ONE
 	$HUD/ScoreLabel.offset_transform_rotation = 0.0
 	$GameOver/RestartButton.offset_transform_scale = Vector2.ONE
@@ -184,13 +193,22 @@ func _on_game_over_restart() -> void:
 	new_game()
 
 
-func _input(event: InputEvent) -> void:
-	if Engine.is_editor_hint() or OS.is_debug_build():
-		if event is InputEventKey and event.physical_keycode == KEY_R and event.pressed:
-			new_game()
+func _on_game_over_mouse_entered() -> void:
+	sfx.stream = focus
+	sfx.play()
 
 
 func _on_food_spawn_dust(position: Vector2) -> void:
-	$World/Dust.restart()
-	$World/Dust.global_position = position + Vector2(25, 25)
-	$World/Dust.emitting = true
+	var dust: GPUParticles2D = dust_scene.instantiate()
+	dust.position = position + Vector2(25, 25)
+	dust.emitting = true
+	add_child(dust, true)
+	sfx.stream = drop
+	sfx.play()
+
+
+func _input(event: InputEvent) -> void:
+	if Engine.is_editor_hint() or OS.is_debug_build():
+		if event is InputEventKey and event.physical_keycode == KEY_R and event.pressed:
+			can_move = false
+			new_game()

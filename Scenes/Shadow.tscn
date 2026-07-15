@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cyboqn7u8b1ak"]
+
+[ext_resource type="Script" uid="uid://qcr4qkuxe622" path="res://Scripts/Shadow.gd" id="1_r85s8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cjwfd"]
+bg_color = Color(0, 0, 0, 0.49019608)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[node name="Shadow" type="Panel" unique_id=1746907450]
+show_behind_parent = true
+custom_minimum_size = Vector2(50, 50)
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(25, 25)
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_cjwfd")
+script = ExtResource("1_r85s8")
