@@ -38,6 +38,7 @@ Here are credits to third-party assets I've used with their respective licenses.
 - [Simple circle transition](https://godotshaders.com/shader/simple-circle-transition-3/) by [Elephando](https://godotshaders.com/author/elephando/) (CC0 license)
 - [2D outline/inline, configured for sprite sheets](https://godotshaders.com/shader/2d-outline-inline-configured-for-sprite-sheets/) by [juulpower](https://godotshaders.com/author/juulpower/) (CC0 license)
 - [All in one outline shader](https://godotshaders.com/shader/all-in-one-outline-shader/) by [gnamimates](https://godotshaders.com/author/gnamimates/) (CC0 license)
+- [Replace Color](https://godotshaders.com/shader/replace-color/) by [edo0xff](https://godotshaders.com/author/edo0xff/) (CC0 license)
 
 
 ### Icons

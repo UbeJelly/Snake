@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://2p35jk1ggllc" path="res://Assets/BoldPixels.ttf" id="1_sd512"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kln2b"]
-bg_color = Color(0.4457512, 0.62056583, 3.85046e-07, 1)
+bg_color = Color(0.84313726, 0.5568628, 1, 1)
 
 [node name="HUD" type="CanvasLayer" unique_id=300059963]
 script = ExtResource("1_jo1ms")

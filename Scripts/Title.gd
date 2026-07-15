@@ -10,11 +10,11 @@ func _ready() -> void:
 
 func jump_up() -> void:
 	if visible == true:
-		$Icon.offset_transform_scale = Vector2.ONE
-		$Icon.offset_transform_position.y = 0.0
+		$%Icon.offset_transform_scale = Vector2.ONE
+		$%Icon.offset_transform_position.y = 0.0
 		tween = get_tree().create_tween().set_parallel(true).bind_node(self)
-		tween.tween_property($Icon, "offset_transform_scale", Vector2(0.9, 1.25), 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-		tween.tween_property($Icon, "offset_transform_position:y", -100, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+		tween.tween_property($%Icon, "offset_transform_scale", Vector2(0.9, 1.25), 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+		tween.tween_property($%Icon, "offset_transform_position:y", -100, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 		await tween.finished
 		bounce()
 	else: if tween: tween.kill()
@@ -23,8 +23,8 @@ func jump_up() -> void:
 func bounce() -> void:
 	if visible == true:
 		tween = get_tree().create_tween().set_parallel(true).bind_node(self)
-		tween.tween_property($Icon, "offset_transform_scale", Vector2.ONE, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
-		tween.tween_property($Icon, "offset_transform_position:y", 0.0, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+		tween.tween_property($%Icon, "offset_transform_scale", Vector2.ONE, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+		tween.tween_property($%Icon, "offset_transform_position:y", 0.0, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 		await tween.finished
 		jump_up()
 	else: if tween: tween.kill()

@@ -2,22 +2,46 @@
 
 [ext_resource type="Script" uid="uid://crmmdq4u7y6b3" path="res://Scripts/Title.gd" id="1_phf2g"]
 [ext_resource type="FontFile" uid="uid://2p35jk1ggllc" path="res://Assets/BoldPixels.ttf" id="2_6khh7"]
+[ext_resource type="Shader" uid="uid://iypvip71ccjp" path="res://Resources/ColorSwap.gdshader" id="2_bwrlp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_phf2g"]
+shader = ExtResource("2_bwrlp")
+shader_parameter/tolerance = 0.999999977648
+shader_parameter/prev_color = Color(0, 0, 0, 1)
+shader_parameter/new_color = Color(0.40929937, 0.2305041, 0.6827317, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_mqryn"]
+viewport_path = NodePath("SubViewport")
 
 [node name="Title" type="CanvasLayer" unique_id=1645685021]
 script = ExtResource("1_phf2g")
 
-[node name="Icon" type="RichTextLabel" parent="." unique_id=961158107]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=706824683]
+transparent_bg = true
+size = Vector2i(750, 750)
+
+[node name="Screen" type="Control" parent="SubViewport" unique_id=1444453170]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="RichTextLabel" parent="SubViewport/Screen" unique_id=961158107]
+unique_name_in_owner = true
 z_index = 1
 clip_contents = false
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -400.0
-offset_top = -125.0
-offset_right = -66.0
-offset_bottom = 116.0
+offset_left = -391.0
+offset_top = -132.0
+offset_right = -57.0
+offset_bottom = 109.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
@@ -36,17 +60,18 @@ vertical_alignment = 1
 meta_underlined = false
 hint_underlined = false
 
-[node name="Text" type="RichTextLabel" parent="." unique_id=1995201346]
+[node name="Text" type="RichTextLabel" parent="SubViewport/Screen" unique_id=1995201346]
 clip_contents = false
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -175.0
-offset_top = -84.0
-offset_right = 365.0
-offset_bottom = 84.0
+offset_left = -166.0
+offset_top = -91.0
+offset_right = 374.0
+offset_bottom = 77.0
 grow_horizontal = 2
 grow_vertical = 2
 localize_numeral_system = false
@@ -64,17 +89,18 @@ vertical_alignment = 1
 meta_underlined = false
 hint_underlined = false
 
-[node name="Prompt" type="RichTextLabel" parent="." unique_id=399643197]
+[node name="Prompt" type="RichTextLabel" parent="SubViewport/Screen" unique_id=399643197]
 clip_contents = false
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -186.0
-offset_top = 178.0
-offset_right = 186.0
-offset_bottom = 290.0
+offset_left = -177.0
+offset_top = 171.0
+offset_right = 195.0
+offset_bottom = 283.0
 grow_horizontal = 2
 grow_vertical = 2
 localize_numeral_system = false
@@ -92,7 +118,7 @@ vertical_alignment = 1
 meta_underlined = false
 hint_underlined = false
 
-[node name="Arrows" type="Control" parent="Prompt" unique_id=1032075000]
+[node name="Arrows" type="Control" parent="SubViewport/Screen/Prompt" unique_id=1032075000]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -108,7 +134,7 @@ grow_vertical = 2
 offset_transform_enabled = true
 offset_transform_rotation = -0.2617994
 
-[node name="X" type="RichTextLabel" parent="Prompt/Arrows" unique_id=398772161]
+[node name="X" type="RichTextLabel" parent="SubViewport/Screen/Prompt/Arrows" unique_id=398772161]
 clip_contents = false
 layout_mode = 1
 anchors_preset = 8
@@ -138,7 +164,7 @@ vertical_alignment = 1
 meta_underlined = false
 hint_underlined = false
 
-[node name="Y" type="RichTextLabel" parent="Prompt/Arrows" unique_id=1018521219]
+[node name="Y" type="RichTextLabel" parent="SubViewport/Screen/Prompt/Arrows" unique_id=1018521219]
 clip_contents = false
 layout_mode = 1
 anchors_preset = 8
@@ -168,7 +194,7 @@ vertical_alignment = 1
 meta_underlined = false
 hint_underlined = false
 
-[node name="WASD" type="Control" parent="Prompt" unique_id=1263743189]
+[node name="WASD" type="Control" parent="SubViewport/Screen/Prompt" unique_id=1263743189]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -184,7 +210,7 @@ grow_vertical = 2
 offset_transform_enabled = true
 offset_transform_rotation = 0.2617994
 
-[node name="X" type="RichTextLabel" parent="Prompt/WASD" unique_id=1481885089]
+[node name="X" type="RichTextLabel" parent="SubViewport/Screen/Prompt/WASD" unique_id=1481885089]
 clip_contents = false
 layout_mode = 1
 anchors_preset = 8
@@ -214,7 +240,7 @@ vertical_alignment = 1
 meta_underlined = false
 hint_underlined = false
 
-[node name="Y" type="RichTextLabel" parent="Prompt/WASD" unique_id=1887792021]
+[node name="Y" type="RichTextLabel" parent="SubViewport/Screen/Prompt/WASD" unique_id=1887792021]
 clip_contents = false
 layout_mode = 1
 anchors_preset = 8
@@ -243,5 +269,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 meta_underlined = false
 hint_underlined = false
+
+[node name="Display" type="TextureRect" parent="." unique_id=338005227]
+material = SubResource("ShaderMaterial_phf2g")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_mqryn")
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
