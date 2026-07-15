@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://ckyl3n35wwkg8" path="res://Resources/Shadow.gdshader" id="5_50glp"]
 [ext_resource type="PackedScene" uid="uid://cyia0niv2m084" path="res://Scenes/GameOver.tscn" id="5_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://cwrxav0e7w5k0" path="res://Scenes/Transition.tscn" id="6_v1gob"]
+[ext_resource type="PackedScene" uid="uid://cejhlk5ptxeje" path="res://Scenes/Title.tscn" id="9_vy5pj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v1gob"]
 shader = ExtResource("4_jw32o")
@@ -154,12 +155,15 @@ process_material = SubResource("ParticleProcessMaterial_wy31b")
 
 [node name="HUD" parent="." unique_id=300059963 instance=ExtResource("3_rgh2o")]
 
+[node name="GameOver" parent="." unique_id=1443684564 instance=ExtResource("5_pbw6q")]
+process_mode = 2
+visible = false
+
+[node name="Title" parent="." unique_id=1645685021 instance=ExtResource("9_vy5pj")]
+
 [node name="Transition" parent="." unique_id=1720800594 instance=ExtResource("6_v1gob")]
 process_mode = 3
 visible = false
-
-[node name="GameOver" parent="." unique_id=1443684564 instance=ExtResource("5_pbw6q")]
-process_mode = 2
 
 [node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1097608809]
 process_mode = 3

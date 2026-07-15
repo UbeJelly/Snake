@@ -1,6 +1,8 @@
-# Snake
-
-A simple snake game made with Godot.
+<h1 align="center">🐍Snake</h1>
+<p align="center">A simple snake game made with Godot.</p>
+<p align="center">
+    <img width="320" src=".github/title_preview.png" alt="title_preview.png">
+</p>
 
 ## Features
 

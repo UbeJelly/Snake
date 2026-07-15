@@ -25,7 +25,7 @@ var snake_refs: Array[Panel]
 var head: Vector2i
 
 # move variables
-var spawn_point := Vector2i(9, 9)
+var spawn_point := Vector2i(7, 6)
 var up := Vector2i.UP
 var down := Vector2i.DOWN
 var left := Vector2i.LEFT
@@ -49,6 +49,7 @@ func _ready() -> void:
 
 func new_game() -> void:
 	get_tree().paused = false
+	$Title.show()
 	get_tree().call_group("segments", "queue_free")
 	get_tree().call_group("dusts", "queue_free")
 	$GameOver.hide()
@@ -67,8 +68,7 @@ func spawn_snake() -> void:
 	snake_data.clear()
 	snake_refs.clear()
 
-	# start at spawn_point, make tail segments
-	for i in range(3):
+	for i in range(3): # start at spawn_point, make tail segments
 		add_segment(spawn_point + Vector2i(0, i))
 
 	head = snake_data[0]
@@ -94,17 +94,22 @@ func _process(_delta: float) -> void:
 func move_snake() -> void:
 	if can_move:
 		if Input.is_action_just_pressed("move_down") and move_direction != up:
+			$Title.hide()
 			move_direction = down
 			set_move()
 		if Input.is_action_just_pressed("move_up") and move_direction != down:
+			$Title.hide()
 			move_direction = up
 			set_move()
 		if Input.is_action_just_pressed("move_left") and move_direction != right:
+			$Title.hide()
 			move_direction = left
 			set_move()
 		if Input.is_action_just_pressed("move_right") and move_direction != left:
+			$Title.hide()
 			move_direction = right
 			set_move()
+			
 
 
 func set_move() -> void:
@@ -211,4 +216,5 @@ func _input(event: InputEvent) -> void:
 	if Engine.is_editor_hint() or OS.is_debug_build():
 		if event is InputEventKey and event.physical_keycode == KEY_R and event.pressed:
 			can_move = false
+			$Title.hide()
 			new_game()

@@ -1,0 +1,247 @@
+[gd_scene format=3 uid="uid://cejhlk5ptxeje"]
+
+[ext_resource type="Script" uid="uid://crmmdq4u7y6b3" path="res://Scripts/Title.gd" id="1_phf2g"]
+[ext_resource type="FontFile" uid="uid://2p35jk1ggllc" path="res://Assets/BoldPixels.ttf" id="2_6khh7"]
+
+[node name="Title" type="CanvasLayer" unique_id=1645685021]
+script = ExtResource("1_phf2g")
+
+[node name="Icon" type="RichTextLabel" parent="." unique_id=961158107]
+z_index = 1
+clip_contents = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -125.0
+offset_right = -66.0
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+localize_numeral_system = false
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_6khh7")
+theme_override_font_sizes/normal_font_size = 192
+bbcode_enabled = true
+text = "🐍"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+meta_underlined = false
+hint_underlined = false
+
+[node name="Text" type="RichTextLabel" parent="." unique_id=1995201346]
+clip_contents = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -84.0
+offset_right = 365.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 80
+theme_override_fonts/normal_font = ExtResource("2_6khh7")
+theme_override_font_sizes/normal_font_size = 160
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0]SNAKE[/wave]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+meta_underlined = false
+hint_underlined = false
+
+[node name="Prompt" type="RichTextLabel" parent="." unique_id=399643197]
+clip_contents = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -186.0
+offset_top = 178.0
+offset_right = 186.0
+offset_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 24
+theme_override_fonts/normal_font = ExtResource("2_6khh7")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[pulse freq=1.25 color=#ffffff40 ease=2.0]Press[br]to start![/pulse]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+meta_underlined = false
+hint_underlined = false
+
+[node name="Arrows" type="Control" parent="Prompt" unique_id=1032075000]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -236.0
+offset_top = -20.0
+offset_right = -196.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_rotation = -0.2617994
+
+[node name="X" type="RichTextLabel" parent="Prompt/Arrows" unique_id=398772161]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -15.0
+offset_right = 60.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/paragraph_separation = 0
+theme_override_constants/outline_size = 24
+theme_override_fonts/normal_font = ExtResource("2_6khh7")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[pulse freq=1.25 color=#ffffff40 ease=2.0][wave amp=25.0 freq=12.0]←  →[/wave][/pulse]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+meta_underlined = false
+hint_underlined = false
+
+[node name="Y" type="RichTextLabel" parent="Prompt/Arrows" unique_id=1018521219]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -52.0
+offset_right = 50.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = -16
+theme_override_constants/outline_size = 24
+theme_override_fonts/normal_font = ExtResource("2_6khh7")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[pulse freq=1.25 color=#ffffff40 ease=2.0][wave amp=25.0 freq=12.0]↑[br]↓[/wave][/pulse]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+meta_underlined = false
+hint_underlined = false
+
+[node name="WASD" type="Control" parent="Prompt" unique_id=1263743189]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 192.0
+offset_top = -14.0
+offset_right = 232.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_rotation = 0.2617994
+
+[node name="X" type="RichTextLabel" parent="Prompt/WASD" unique_id=1481885089]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -15.0
+offset_right = 60.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/paragraph_separation = 0
+theme_override_constants/outline_size = 24
+theme_override_fonts/normal_font = ExtResource("2_6khh7")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[pulse freq=1.25 color=#ffffff40 ease=2.0][wave amp=25.0 freq=12.0]A  D[/wave][/pulse]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+meta_underlined = false
+hint_underlined = false
+
+[node name="Y" type="RichTextLabel" parent="Prompt/WASD" unique_id=1887792021]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -52.0
+offset_right = 50.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = -16
+theme_override_constants/outline_size = 24
+theme_override_fonts/normal_font = ExtResource("2_6khh7")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[pulse freq=1.25 color=#ffffff40 ease=2.0][wave amp=25.0 freq=12.0]W[br]S[/wave][/pulse]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+meta_underlined = false
+hint_underlined = false
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
