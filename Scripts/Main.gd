@@ -21,7 +21,7 @@ var drop_food := true
 # snake_refs variables
 var old_data: Array[Vector2i]
 var snake_data: Array[Vector2i]
-var snake_refs: Array[Panel]
+var snake_refs: Array[Sprite2D]
 var head: Vector2i
 
 # move variables
@@ -33,8 +33,8 @@ var right := Vector2i.RIGHT
 var move_direction := Vector2i.ZERO
 var can_move: bool
 
-@onready var food: Panel = $World/Food
-@onready var snake: Control = $World/SubViewport/Snake
+@onready var food: Sprite2D = $World/SnakeSegments/Entities/Food
+@onready var snake: CanvasGroup = $World/SnakeSegments/Entities/Snake
 
 @onready var sfx: AudioStreamPlayer = $SFX
 @onready var eat: AudioStreamWAV = preload("res://Assets/eat.wav")
@@ -44,6 +44,7 @@ var can_move: bool
 
 
 func _ready() -> void:
+	get_tree().get_root().disable_3d = true
 	new_game()
 
 
@@ -51,6 +52,7 @@ func new_game() -> void:
 	get_tree().paused = false
 	$Title.show()
 	get_tree().call_group("segments", "queue_free")
+	get_tree().call_group("shadows", "queue_free")
 	get_tree().call_group("dusts", "queue_free")
 	$GameOver.hide()
 	score = 0
@@ -76,12 +78,12 @@ func spawn_snake() -> void:
 
 func add_segment(pos: Vector2i) -> void:
 	snake_data.append(pos)
-	var snake_segment: Panel = snake_scene.instantiate()
-	var snake_shadow: Panel = shadow.instantiate()
+	var snake_segment: Sprite2D = snake_scene.instantiate()
+	var snake_shadow: Sprite2D = shadow.instantiate()
 	snake_segment.position = (pos * cell_size) + Vector2i(0, cell_size)
 	snake_shadow.position = (pos * cell_size) + Vector2i(0, cell_size)
 	snake.add_child(snake_segment, true)
-	$World.add_child(snake_shadow, true)
+	$World/SnakeSegments/Entities.add_child(snake_shadow, true)
 	snake_refs.append(snake_segment)
 	snake_segment.emit_signal("spawn_segment")
 	snake_shadow.emit_signal("follow_segment", snake_segment)
@@ -205,9 +207,13 @@ func _on_game_over_mouse_entered() -> void:
 
 func _on_food_spawn_dust(position: Vector2) -> void:
 	var dust: GPUParticles2D = dust_scene.instantiate()
+	var food_shadow: Sprite2D = shadow.instantiate()
+	food_shadow.position = position
 	dust.position = position + Vector2(25, 25)
 	dust.emitting = true
-	add_child(dust, true)
+	$World/SnakeSegments/Entities.add_child(dust, true)
+	$World/SnakeSegments/Entities.add_child(food_shadow, true)
+	food_shadow.emit_signal("follow_segment", food)
 	sfx.stream = drop
 	sfx.play()
 
@@ -216,5 +222,7 @@ func _input(event: InputEvent) -> void:
 	if Engine.is_editor_hint() or OS.is_debug_build():
 		if event is InputEventKey and event.physical_keycode == KEY_R and event.pressed:
 			can_move = false
+			game_started = false
+			$MoveTimer.stop()
 			$Title.hide()
 			new_game()

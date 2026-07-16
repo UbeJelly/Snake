@@ -1,24 +1,9 @@
 [gd_scene format=3 uid="uid://bn3yu8gwhh4cg"]
 
+[ext_resource type="Texture2D" uid="uid://cv50setij5sge" path="res://Assets/segment.svg" id="1_63n7t"]
 [ext_resource type="Script" uid="uid://cqd0td0wmhd8o" path="res://Scripts/SnakeSegment.gd" id="1_cjwfd"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mqryn"]
-bg_color = Color(0.23406506, 0.6893213, 0.9999998, 1)
-border_width_left = 4
-border_width_top = 2
-border_width_right = 4
-border_width_bottom = 20
-border_color = Color(0.09935089, 0.39107466, 1, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[node name="SnakeSegment" type="Panel" unique_id=769451045 groups=["segments"]]
-custom_minimum_size = Vector2(50, 50)
-offset_right = 40.0
-offset_bottom = 40.0
-pivot_offset = Vector2(25, 25)
-offset_transform_enabled = true
-theme_override_styles/panel = SubResource("StyleBoxFlat_mqryn")
+[node name="SnakeSegment" type="Sprite2D" unique_id=2144666340 groups=["segments"]]
+texture = ExtResource("1_63n7t")
+centered = false
 script = ExtResource("1_cjwfd")

@@ -7,21 +7,17 @@
 [ext_resource type="PackedScene" uid="uid://b4v6cf8p7nev4" path="res://Scenes/Food.tscn" id="4_rgh2o"]
 [ext_resource type="Shader" uid="uid://ckyl3n35wwkg8" path="res://Resources/Shadow.gdshader" id="5_50glp"]
 [ext_resource type="PackedScene" uid="uid://cyia0niv2m084" path="res://Scenes/GameOver.tscn" id="5_pbw6q"]
-[ext_resource type="Texture2D" uid="uid://bexdlt0ke0m16" path="res://Assets/circle.svg" id="6_bmxlf"]
 [ext_resource type="PackedScene" uid="uid://cwrxav0e7w5k0" path="res://Scenes/Transition.tscn" id="6_v1gob"]
 [ext_resource type="PackedScene" uid="uid://cejhlk5ptxeje" path="res://Scenes/Title.tscn" id="9_vy5pj"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v1gob"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_grg3l"]
 shader = ExtResource("4_jw32o")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 10.0
-shader_parameter/pattern = 2
-shader_parameter/inside = false
-shader_parameter/add_margins = false
-shader_parameter/number_of_images = Vector2(1, 1)
+shader_parameter/allow_out_of_bounds = true
+shader_parameter/outline_thickness = 10.0
+shader_parameter/outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_mqryn"]
-viewport_path = NodePath("World/SubViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_v88f4"]
+viewport_path = NodePath("World/SnakeSegments")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jw32o"]
 shader = ExtResource("5_50glp")
@@ -35,216 +31,64 @@ shader_parameter/square_border = false
 shader_parameter/offset = Vector2(-5, -5)
 shader_parameter/max_or_add = false
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_wy31b"]
-viewport_path = NodePath("World/SubViewport2")
-
-[sub_resource type="Gradient" id="Gradient_50glp"]
-offsets = PackedFloat32Array(0.42905405, 0.6824324, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 0.047058824, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_mqryn"]
-gradient = SubResource("Gradient_50glp")
-width = 40
-height = 40
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="Curve" id="Curve_vy5pj"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.47122306, 0.9230769), -2.1384664, -2.1384664, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_kvx2x"]
-curve = SubResource("Curve_vy5pj")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wy31b"]
-lifetime_randomness = 1.0
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(375, 375, 1)
-direction = Vector3(1, 1, 0)
-spread = 180.0
-flatness = 1.0
-initial_velocity_min = 10.0
-initial_velocity_max = 30.0
-radial_velocity_min = -10.000022
-radial_velocity_max = 9.999977
-gravity = Vector3(0, 0, 0)
-linear_accel_min = -10.000002
-linear_accel_max = 9.999997
-scale_curve = SubResource("CurveTexture_kvx2x")
-scale_over_velocity_max = 10.0
-
-[sub_resource type="Curve" id="Curve_h1m7h"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.502809, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_grg3l"]
-curve = SubResource("Curve_h1m7h")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_frkhe"]
-lifetime_randomness = 1.0
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(375, 0, 1)
-direction = Vector3(0, -1, 0)
-spread = 0.0
-flatness = 1.0
-initial_velocity_min = 1.0
-initial_velocity_max = 10.0
-radial_velocity_min = -10.000022
-radial_velocity_max = 9.999977
-gravity = Vector3(0, 0, 0)
-linear_accel_min = -10.000002
-linear_accel_max = 9.999997
-scale_curve = SubResource("CurveTexture_grg3l")
-scale_over_velocity_max = 10.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4kpch"]
-shader = ExtResource("4_jw32o")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/width = 10.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = false
-shader_parameter/number_of_images = Vector2(1, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_v88f4"]
-viewport_path = NodePath("Particles/SubViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_vy5pj"]
+viewport_path = NodePath("World/Outlined")
 
 [node name="Main" type="Node" unique_id=2132924122]
 script = ExtResource("1_idj7w")
 
-[node name="World" type="Control" parent="." unique_id=390534346]
-y_sort_enabled = true
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="World" type="Node2D" parent="." unique_id=2121682075]
 
-[node name="BG" type="TextureRect" parent="World" unique_id=1891076872]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 50.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="BG" type="Sprite2D" parent="World" unique_id=1666114544]
 texture = ExtResource("2_kln2b")
-expand_mode = 1
-stretch_mode = 2
+centered = false
+offset = Vector2(0, 50)
 
-[node name="Food" parent="World" unique_id=769451045 instance=ExtResource("4_rgh2o")]
-z_index = 1
-layout_mode = 0
-offset_left = 50.0
-offset_top = 100.0
-offset_right = 100.0
-offset_bottom = 150.0
-
-[node name="SubViewport" type="SubViewport" parent="World" unique_id=395370170]
+[node name="SnakeSegments" type="SubViewport" parent="World" unique_id=395370170]
+disable_3d = true
 transparent_bg = true
-size = Vector2i(750, 750)
+gui_disable_input = true
+gui_snap_controls_to_pixels = false
+sdf_oversize = 0
+sdf_scale = 2
+oversampling = false
+size = Vector2i(750, 800)
 
-[node name="Snake" type="Control" parent="World/SubViewport" unique_id=967251976]
-z_index = 1
+[node name="Entities" type="Node2D" parent="World/SnakeSegments" unique_id=618460833]
 y_sort_enabled = true
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -50.0
-offset_bottom = -50.0
-grow_horizontal = 2
-grow_vertical = 2
 
-[node name="SubViewport2" type="SubViewport" parent="World" unique_id=1311388998]
+[node name="Snake" type="CanvasGroup" parent="World/SnakeSegments/Entities" unique_id=1826105156]
+y_sort_enabled = true
+
+[node name="Food" parent="World/SnakeSegments/Entities" unique_id=769451045 instance=ExtResource("4_rgh2o")]
+position = Vector2(50, 100)
+
+[node name="Outlined" type="SubViewport" parent="World" unique_id=1311388998]
+disable_3d = true
 transparent_bg = true
-size = Vector2i(750, 750)
-size_2d_override = Vector2i(750, 750)
+gui_disable_input = true
+gui_snap_controls_to_pixels = false
+sdf_oversize = 0
+sdf_scale = 2
+oversampling = false
+size = Vector2i(750, 800)
 
-[node name="SnakeTex" type="TextureRect" parent="World/SubViewport2" unique_id=44640181]
-material = SubResource("ShaderMaterial_v1gob")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("ViewportTexture_mqryn")
+[node name="Entities" type="Sprite2D" parent="World/Outlined" unique_id=1302245944]
+material = SubResource("ShaderMaterial_grg3l")
+texture = SubResource("ViewportTexture_v88f4")
+centered = false
 
-[node name="FinalSnakeTex" type="TextureRect" parent="." unique_id=439242419]
+[node name="Screen" type="CanvasLayer" parent="." unique_id=90098618]
+follow_viewport_enabled = true
+
+[node name="Game" type="TextureRect" parent="Screen" unique_id=439242419]
 material = SubResource("ShaderMaterial_jw32o")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 50.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("ViewportTexture_wy31b")
-
-[node name="Particles" type="Node2D" parent="." unique_id=841677757]
-
-[node name="Firefly" type="GPUParticles2D" parent="Particles" unique_id=861382134]
-position = Vector2(375, 425)
-amount = 64
-texture = SubResource("GradientTexture2D_mqryn")
-lifetime = 10.0
-randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_wy31b")
-
-[node name="SubViewport" type="SubViewport" parent="Particles" unique_id=85345639]
-transparent_bg = true
-size = Vector2i(750, 750)
-
-[node name="Bounds" type="CanvasGroup" parent="Particles/SubViewport" unique_id=134297468]
-modulate = Color(0.8431162, 0.5550757, 1, 1)
-position = Vector2(0, -50)
-
-[node name="Top" type="GPUParticles2D" parent="Particles/SubViewport/Bounds" unique_id=870133078]
-position = Vector2(375, 50)
-rotation = -3.1415925
-amount = 128
-texture = ExtResource("6_bmxlf")
-lifetime = 5.0
-randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_frkhe")
-
-[node name="Left" type="GPUParticles2D" parent="Particles/SubViewport/Bounds" unique_id=1686588486]
-position = Vector2(0, 400)
-rotation = 1.5707964
-amount = 128
-texture = ExtResource("6_bmxlf")
-lifetime = 5.0
-randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_frkhe")
-
-[node name="Bottom" type="GPUParticles2D" parent="Particles/SubViewport/Bounds" unique_id=1010921953]
-position = Vector2(375, 800)
-amount = 128
-texture = ExtResource("6_bmxlf")
-lifetime = 5.0
-randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_frkhe")
-
-[node name="Right" type="GPUParticles2D" parent="Particles/SubViewport/Bounds" unique_id=386164633]
-position = Vector2(750, 400)
-rotation = -1.5707964
-amount = 128
-texture = ExtResource("6_bmxlf")
-lifetime = 5.0
-randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_frkhe")
-
-[node name="Danger" type="TextureRect" parent="." unique_id=1234509526]
-material = SubResource("ShaderMaterial_4kpch")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("ViewportTexture_v88f4")
+texture = SubResource("ViewportTexture_vy5pj")
 
 [node name="HUD" parent="." unique_id=300059963 instance=ExtResource("3_rgh2o")]
 
@@ -264,7 +108,7 @@ process_mode = 3
 [node name="MoveTimer" type="Timer" parent="." unique_id=1745761599]
 wait_time = 0.1
 
-[connection signal="spawn_dust" from="World/Food" to="." method="_on_food_spawn_dust"]
+[connection signal="spawn_dust" from="World/SnakeSegments/Entities/Food" to="." method="_on_food_spawn_dust"]
 [connection signal="mouse_entered" from="GameOver" to="." method="_on_game_over_mouse_entered"]
 [connection signal="restart" from="GameOver" to="." method="_on_game_over_restart"]
 [connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]

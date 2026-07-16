@@ -2,13 +2,6 @@
 
 [ext_resource type="Script" uid="uid://crmmdq4u7y6b3" path="res://Scripts/Title.gd" id="1_phf2g"]
 [ext_resource type="FontFile" uid="uid://2p35jk1ggllc" path="res://Assets/BoldPixels.ttf" id="2_6khh7"]
-[ext_resource type="Shader" uid="uid://iypvip71ccjp" path="res://Resources/ColorSwap.gdshader" id="2_bwrlp"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_phf2g"]
-shader = ExtResource("2_bwrlp")
-shader_parameter/tolerance = 0.999999977648
-shader_parameter/prev_color = Color(0, 0, 0, 1)
-shader_parameter/new_color = Color(0.40929937, 0.2305041, 0.6827317, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_mqryn"]
 viewport_path = NodePath("SubViewport")
@@ -97,9 +90,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -177.0
+offset_left = -185.0
 offset_top = 171.0
-offset_right = 195.0
+offset_right = 187.0
 offset_bottom = 283.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -271,7 +264,6 @@ meta_underlined = false
 hint_underlined = false
 
 [node name="Display" type="TextureRect" parent="." unique_id=338005227]
-material = SubResource("ShaderMaterial_phf2g")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

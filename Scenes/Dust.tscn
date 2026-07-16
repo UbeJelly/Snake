@@ -12,8 +12,8 @@ point_count = 3
 curve = SubResource("Curve_v1gob")
 
 [sub_resource type="Curve" id="Curve_od6q6"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.19254659, 0.5393259), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.19254659, 0.5393259), 0.0, 0.0, 0, 0, Vector2(0.85555553, 0.19101131), -0.8368851, -0.8368851, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_od6q6"]
 curve = SubResource("Curve_od6q6")
@@ -23,22 +23,26 @@ particle_flag_disable_z = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 0, 0)
 emission_ring_height = 1.0
-emission_ring_radius = 30.0
-emission_ring_inner_radius = 20.0
+emission_ring_radius = 40.0
+emission_ring_inner_radius = 30.0
 emission_ring_cone_angle = 90.0
 direction = Vector3(0, 0, 0)
+spread = 180.0
+flatness = 1.0
 gravity = Vector3(0, 0, 0)
 linear_accel_min = -2.2351742e-06
-linear_accel_max = 49.999996
-radial_accel_min = 29.999996
-radial_accel_max = 49.999996
+linear_accel_max = 19.999998
+radial_accel_min = 9.999997
+radial_accel_max = 29.999996
 radial_accel_curve = SubResource("CurveTexture_bmxlf")
 attractor_interaction_enabled = false
-scale_max = 5.0
+scale_max = 2.0
 scale_curve = SubResource("CurveTexture_od6q6")
 
 [node name="Dust" type="GPUParticles2D" unique_id=2101318271 groups=["dusts"]]
+z_index = -2
 emitting = false
+amount = 20
 texture = ExtResource("1_od6q6")
 one_shot = true
 explosiveness = 1.0
