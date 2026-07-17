@@ -1,10 +1,12 @@
 extends CanvasLayer
 
 
+signal hide_title
 var tween
 
 
 func _ready() -> void:
+	connect("hide_title", _on_hide_title)
 	jump_up()
 
 
@@ -30,6 +32,18 @@ func bounce() -> void:
 	else: if tween: tween.kill()
 
 
+func _on_hide_title() -> void:
+	disconnect("hide_title", _on_hide_title)
+	if tween: tween.kill()
+	$Display.self_modulate = Color.WHITE
+	tween = get_tree().create_tween().set_parallel(true).bind_node(self)
+	tween.tween_property($Display, "self_modulate", Color.TRANSPARENT, 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	await tween.finished
+	hide()
+
+
 func _on_visibility_changed() -> void:
 	if visible == true:
+		connect("hide_title", _on_hide_title)
+		$Display.self_modulate = Color.WHITE
 		jump_up()

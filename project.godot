@@ -11,12 +11,15 @@ config_version=5
 [application]
 
 config/name="Snake"
-config/description="A simple snake game made with Godot."
+config/description="Your classic snake game remake!"
 run/main_scene="uid://cybg413dhj0v0"
 run/disable_stdout=true
 run/disable_stderr=true
 config/disable_project_settings_override=true
 config/features=PackedStringArray("4.7", "Forward Plus")
+boot_splash/bg_color=Color(0.3529412, 0.67058825, 0.34509805, 1)
+boot_splash/stretch_mode=0
+boot_splash/image="uid://boujo8cn3sfvu"
 config/icon="uid://boujo8cn3sfvu"
 config/windows_native_icon="res://Assets/icon.ico"
 

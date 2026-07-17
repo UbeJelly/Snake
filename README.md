@@ -9,12 +9,11 @@
 ## Features
 
 Some good stuff in this small project:
-
+- Lite and fast ⚡
 - Animations with `Tween` and `GPUParticles2D`
 - Outlined `Panel` group via `SubViewport`, `ViewportTexture`, and shaders
 - Transitions with shaders, signals, tweens, and player's coordinates
 - Barebones and easy to extend from
-- Small size and fast performance (so far)
 
 ## Motivation
 To learn and experience the following:

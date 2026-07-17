@@ -50,11 +50,12 @@ func _ready() -> void:
 
 func new_game() -> void:
 	get_tree().paused = false
-	$Title.show()
 	get_tree().call_group("segments", "queue_free")
 	get_tree().call_group("shadows", "queue_free")
 	get_tree().call_group("dusts", "queue_free")
+
 	$GameOver.hide()
+	$Title.show()
 	score = 0
 	$HUD/ScoreLabel.text = "SCORE: %s" % score
 	move_direction = up
@@ -96,22 +97,25 @@ func _process(_delta: float) -> void:
 func move_snake() -> void:
 	if can_move:
 		if Input.is_action_just_pressed("move_down") and move_direction != up:
-			$Title.hide()
+			if $Title.has_signal("hide_title"):
+				$Title.emit_signal("hide_title")
 			move_direction = down
 			set_move()
 		if Input.is_action_just_pressed("move_up") and move_direction != down:
-			$Title.hide()
+			if $Title.has_signal("hide_title"):
+				$Title.emit_signal("hide_title")
 			move_direction = up
 			set_move()
 		if Input.is_action_just_pressed("move_left") and move_direction != right:
-			$Title.hide()
+			if $Title.has_signal("hide_title"):
+				$Title.emit_signal("hide_title")
 			move_direction = left
 			set_move()
 		if Input.is_action_just_pressed("move_right") and move_direction != left:
-			$Title.hide()
+			if $Title.has_signal("hide_title"):
+				$Title.emit_signal("hide_title")
 			move_direction = right
 			set_move()
-			
 
 
 func set_move() -> void:
@@ -224,5 +228,4 @@ func _input(event: InputEvent) -> void:
 			can_move = false
 			game_started = false
 			$MoveTimer.stop()
-			$Title.hide()
 			new_game()
