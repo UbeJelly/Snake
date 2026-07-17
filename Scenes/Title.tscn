@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://crmmdq4u7y6b3" path="res://Scripts/Title.gd" id="1_phf2g"]
 [ext_resource type="FontFile" uid="uid://2p35jk1ggllc" path="res://Assets/BoldPixels.ttf" id="2_6khh7"]
+[ext_resource type="Texture2D" uid="uid://d1pm63ofhs3h5" path="res://Assets/snake.svg" id="2_bwrlp"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_mqryn"]
 viewport_path = NodePath("SubViewport")
@@ -21,10 +22,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="RichTextLabel" parent="SubViewport/Screen" unique_id=961158107]
+[node name="Icon" type="TextureRect" parent="SubViewport/Screen" unique_id=433391425]
 unique_name_in_owner = true
 z_index = 1
-clip_contents = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -39,19 +39,8 @@ grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
 localize_numeral_system = false
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("2_6khh7")
-theme_override_font_sizes/normal_font_size = 192
-bbcode_enabled = true
-text = "🐍"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-meta_underlined = false
-hint_underlined = false
+texture = ExtResource("2_bwrlp")
+stretch_mode = 5
 
 [node name="Text" type="RichTextLabel" parent="SubViewport/Screen" unique_id=1995201346]
 clip_contents = false
