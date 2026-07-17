@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://7hojssycxo5r"]
+
+[ext_resource type="Script" uid="uid://cv77ywbunhbxc" path="res://Scripts/PauseMenu.gd" id="1_qwhev"]
+[ext_resource type="FontFile" uid="uid://2p35jk1ggllc" path="res://Assets/BoldPixels.ttf" id="2_5w4ur"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kpch"]
+bg_color = Color(0.3260239, 0.6308866, 0, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+shadow_size = 8
+shadow_offset = Vector2(4, 4)
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=332016833]
+process_mode = 2
+visible = false
+script = ExtResource("1_qwhev")
+
+[node name="Screen" type="Control" parent="." unique_id=1618564640]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="RichTextLabel" parent="Screen" unique_id=1320232600]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -255.0
+offset_top = -106.0
+offset_right = 285.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(270, 84)
+localize_numeral_system = false
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 80
+theme_override_fonts/normal_font = ExtResource("2_5w4ur")
+theme_override_font_sizes/normal_font_size = 160
+text = "PAUSED"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+meta_underlined = false
+hint_underlined = false
+
+[node name="ContinueButton" type="Button" parent="Screen" unique_id=1684659345]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.0
+offset_top = 93.0
+offset_right = 184.0
+offset_bottom = 169.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(184, 38)
+offset_transform_enabled = true
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 0.5019608)
+theme_override_fonts/font = ExtResource("2_5w4ur")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_4kpch")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4kpch")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4kpch")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_4kpch")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_4kpch")
+theme_override_styles/focus = SubResource("StyleBoxFlat_4kpch")
+text = "CONTINUE"
+
+[connection signal="mouse_entered" from="Screen/ContinueButton" to="." method="_on_ContinueButton_mouse_entered"]
+[connection signal="mouse_exited" from="Screen/ContinueButton" to="." method="_on_ContinueButton_mouse_exited"]
+[connection signal="pressed" from="Screen/ContinueButton" to="." method="_on_continue_button_pressed"]

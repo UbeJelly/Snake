@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bq1e3gmpx4y52" path="res://Scripts/HUD.gd" id="1_jo1ms"]
 [ext_resource type="FontFile" uid="uid://2p35jk1ggllc" path="res://Assets/BoldPixels.ttf" id="1_sd512"]
+[ext_resource type="Texture2D" uid="uid://c8v6xsstgf1d8" path="res://Assets/pause.svg" id="3_psnte"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kln2b"]
 bg_color = Color(0.351209, 0.67213666, 0.34408498, 1)
@@ -37,3 +38,21 @@ theme_override_font_sizes/font_size = 48
 text = "SCORE: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PauseButton" type="TextureButton" parent="." unique_id=435150715]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -46.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 46.0
+grow_horizontal = 0
+pivot_offset = Vector2(21, 21)
+offset_transform_enabled = true
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("3_psnte")
+
+[connection signal="mouse_entered" from="PauseButton" to="." method="_on_pause_button_mouse_entered"]
+[connection signal="mouse_exited" from="PauseButton" to="." method="_on_pause_button_mouse_exited"]
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]

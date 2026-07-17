@@ -35,7 +35,6 @@ window/subwindows/embed_subwindows=false
 window/stretch/mode="canvas_items"
 window/dpi/allow_hidpi=false
 mouse_cursor/custom_image="uid://dyhgbnmys2xi7"
-mouse_cursor/custom_image_hotspot=Vector2(10, 10)
 mouse_cursor/tooltip_position_offset=Vector2(32, 32)
 
 [editor]

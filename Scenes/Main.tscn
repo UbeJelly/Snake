@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://ckyl3n35wwkg8" path="res://Resources/Shadow.gdshader" id="5_50glp"]
 [ext_resource type="PackedScene" uid="uid://cyia0niv2m084" path="res://Scenes/GameOver.tscn" id="5_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://cwrxav0e7w5k0" path="res://Scenes/Transition.tscn" id="6_v1gob"]
+[ext_resource type="PackedScene" uid="uid://7hojssycxo5r" path="res://Scenes/PauseMenu.tscn" id="7_bmxlf"]
 [ext_resource type="PackedScene" uid="uid://cejhlk5ptxeje" path="res://Scenes/Title.tscn" id="9_vy5pj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_grg3l"]
@@ -92,6 +93,8 @@ texture = SubResource("ViewportTexture_vy5pj")
 
 [node name="HUD" parent="." unique_id=300059963 instance=ExtResource("3_rgh2o")]
 
+[node name="PauseMenu" parent="." unique_id=332016833 instance=ExtResource("7_bmxlf")]
+
 [node name="GameOver" parent="." unique_id=1443684564 instance=ExtResource("5_pbw6q")]
 process_mode = 2
 visible = false
@@ -109,6 +112,9 @@ process_mode = 3
 wait_time = 0.1
 
 [connection signal="spawn_dust" from="World/SnakeSegments/Entities/Food" to="." method="_on_food_spawn_dust"]
+[connection signal="pause_game" from="HUD" to="." method="_on_pause_game"]
+[connection signal="continue_game" from="PauseMenu" to="." method="_on_pause_menu_continue_game"]
+[connection signal="mouse_entered" from="PauseMenu" to="." method="_on_pause_menu_mouse_entered"]
 [connection signal="mouse_entered" from="GameOver" to="." method="_on_game_over_mouse_entered"]
 [connection signal="restart" from="GameOver" to="." method="_on_game_over_restart"]
 [connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]

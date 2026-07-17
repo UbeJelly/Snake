@@ -1,5 +1,12 @@
-<h1 align="center">🐍Snake</h1>
-<p align="center">A simple snake game made with Godot.</p>
+<p align="center">
+    <img width="240" src="Assets/icon.png"><br>
+    Your classic snake game remake!
+</p>
+
+# 🐍Snake
+
+This is a simple snake game made with Godot. It mainly focuses on simplicity and a bit ***JUICED UP*** gameplay with the help of `Tween` and `GPUParticles2D`'s animations, as well as some shaders' visual effects.
+
 <p align="center">
     <img width="240" src=".github/game_preview_0.png" alt="game_preview_0.png">
     <img width="240" src=".github/title_preview.png" alt="title_preview.png">
@@ -24,7 +31,8 @@ To learn and experience the following:
 - Apply multiple layers of shaders with the use of viewports and textures
 - Have some insight on shaders (very little atm.)
 - Manage signals and its parameters
-- Manage game states and scenes (i.e. pause state and *GameOver* screen)
+- Manage pause modes (i.e. *PauseMenu* and *GameOver* screen)
+- Modify SVGs and other assets
 
 ## Credits
 
@@ -46,6 +54,7 @@ https://opensvg.dev/icons
 - apple by Goran Spasojevic (MIT license)
 - lemon by Emoji One (CC BY-SA 4.0)
 - grapes by Twitter (CC BY 4.0)
-- circle, Material by Google (Apache 2.0 license)
 - cursor by ProCode (MIT license)
 - hand-pointing-down-02 by Hugeicons
+- pause by Paweł Kuna (MIT license)
+- circle, Material by Google (Apache 2.0 license)

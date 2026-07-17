@@ -204,7 +204,22 @@ func _on_game_over_restart() -> void:
 	new_game()
 
 
+func _on_pause_game() -> void:
+	get_tree().paused = true
+	$PauseMenu.show()
+
+
+func _on_pause_menu_continue_game() -> void:
+	get_tree().paused = false
+	$PauseMenu.hide()
+
+
 func _on_game_over_mouse_entered() -> void:
+	sfx.stream = focus
+	sfx.play()
+
+
+func _on_pause_menu_mouse_entered() -> void:
 	sfx.stream = focus
 	sfx.play()
 
